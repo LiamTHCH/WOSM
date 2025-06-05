@@ -1,0 +1,5 @@
+[servers]
+masster ansible_host=172.16.0.2
+node-1 ansible_host=172.16.0.3
+node-2 ansible_host=172.16.0.4
+

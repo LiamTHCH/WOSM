@@ -1,0 +1,9 @@
+[masters]
+master ansible_host=172.16.0.2
+
+[workers]
+node-1 ansible_host=172.16.0.3
+node-2 ansible_host=172.16.0.4
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3

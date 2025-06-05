@@ -1,0 +1,13 @@
+services:
+    uptime-kuma:
+        restart: unless-stopped
+        ports:
+            - 7070:3001
+        volumes:
+            - KUMA:/app/data
+        container_name: uptime-kuma
+        image: louislam/uptime-kuma:1
+volumes:
+    KUMA:
+        external: true
+        name: KUMA

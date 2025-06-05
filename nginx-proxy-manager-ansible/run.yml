@@ -1,0 +1,25 @@
+---
+- name: NPM - create multiple proxy hosts with loop
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    proxy_hosts:
+      - photos.wosm.liamtc.tech
+      - vpn.wosm.liamtc.tech
+      - web.wosm.liamtc.tech
+      - auth.wosm.liamtc.tech
+      - notification.wosm.liamtc.tech
+      - uptime.wosm.liamtc.tech
+      - dns.wosm.liamtc.tech
+
+  tasks:
+    - name: Create proxy host on NPM
+      include_role:
+        name: npm-management
+      vars:
+        npm_api_domain_name: "{{ item }}"
+        npm_api_host: "172.16.0.2"
+        npm_api_ssl_forced: true
+        npm_api_create_host: true
+      loop: "{{ proxy_hosts }}"

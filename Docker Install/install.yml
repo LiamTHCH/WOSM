@@ -1,0 +1,14 @@
+- name: Install Docker on Ubuntu
+  hosts: docker_nodes
+  become: yes
+
+    tasks:
+    - name: Install Docker
+    ansible.builtin.shell: cd ~ && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+- name: Install Docker on Ubuntu
+  hosts: docker_nodes
+  become: yes
+
+    tasks:
+    - name: Install Docker
+    ansible.builtin.shell: cd ~ && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh

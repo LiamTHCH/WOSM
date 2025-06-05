@@ -1,0 +1,64 @@
+---
+- name: Add multiple DNS records to Cloudflare
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    cloudflare_zone: "wosm.liamtc.tech"
+    cloudflare_records:
+      - name: photos.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+      - name: vpn.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+      - name: web.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+      - name: auth.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+      - name: notification.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+      - name: uptime.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+      - name: dns.wosm.liamtc.tech
+        type: A
+        content: 86.119.48.178
+        ttl: 3600
+        proxied: true
+
+    cloudflare_api_token: "{{ lookup('env', 'CF_API_TOKEN') }}"
+
+  tasks:
+    - name: Create or update Cloudflare DNS records
+      community.general.cloudflare_dns:
+        zone: "{{ cloudflare_zone }}"
+        record: "{{ item.name }}"
+        type: "{{ item.type }}"
+        value: "{{ item.content }}"
+        ttl: "{{ item.ttl }}"
+        proxied: "{{ item.proxied }}"
+        api_token: "{{ cloudflare_api_token }}"
+        state: present
+      loop: "{{ cloudflare_records }}"

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  coredns:
+    image: coredns/coredns:1.8.4
+    container_name: coredns
+    command: -conf /etc/coredns/Corefile -dns.port 53
+    ports:
+      - '53:53'
+      - '53:53/udp'
+      - '8080:8080'
+    volumes:
+      - corefile:/etc/coredns/Corefile
+      - zones:/etc/coredns/zones
+
+volumes:
+  corefile:
+  zones:
